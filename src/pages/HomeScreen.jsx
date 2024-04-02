@@ -24,7 +24,7 @@ const ContentArea = styled.div`
 export default function HomeScreen() {
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <GridContainer>
         <MenuArea>
           <MenuLateral />

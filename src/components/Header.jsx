@@ -2,16 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const MenuContainer = styled.div`
-  background-color: #333;
-  color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  padding: 10px 20px;
-`;
-
-const MenuLogo = styled.h1`
-  margin: 0;
+  width: 100%;
+  padding: 20px 0;
+  @media (max-width: 950px) {
+    justify-content: flex-end;
+  }
 `;
 
 const MenuLinks = styled.div`
@@ -19,9 +17,13 @@ const MenuLinks = styled.div`
 `;
 
 const Link = styled.a`
-  color: white;
+  color: black;
+  font-size: 0.8rem;
   text-decoration: none;
   margin-left: 20px;
+  @media (max-width: 950px) {
+    display: none;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -30,25 +32,29 @@ const SearchContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: none;
-  margin-right: 10px;
+  padding: 5px 40px 5px 10px;
+  background-image: url("src/img/lupa.png") no-repeat;
+  background-position: right 10px center;
+  border-radius: 12px;
+  border: 3px solid #febe10;
+`;
+
+const SearchIcon = styled.img`
+  width: 30px;
 `;
 
 export default function Header() {
   return (
     <MenuContainer>
-      <MenuLogo>Logo</MenuLogo>
-      <MenuLinks>
-        <Link href="#">Link 1</Link>
-        <Link href="#">Link 2</Link>
-        <Link href="#">Link 3</Link>
-      </MenuLinks>
       <SearchContainer>
         <SearchInput type="text" placeholder="Pesquisar..." />
-        <SearchIcon style={{ color: "white" }} />
+        {/* <SearchIcon src="src/img/lupa.png" /> */}
       </SearchContainer>
+      <MenuLinks>
+        <Link href="#">TOP TÓPICOS</Link>
+        <Link href="#">TOP POSTS</Link>
+        <Link href="#">PERFIL</Link>
+      </MenuLinks>
     </MenuContainer>
   );
 }

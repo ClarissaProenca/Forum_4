@@ -15,6 +15,12 @@ export default function Posts() {
     height: auto;
     justify-content: flex-start;
     max-width: 65vw;
+    box-shadow:
+      rgba(95, 158, 160, 0.4) 0px 5px,
+      rgba(95, 158, 160, 0.3) 0px 10px,
+      rgba(95, 158, 160, 0.2) 0px 15px,
+      rgba(95, 158, 160, 0.1) 0px 20px,
+      rgba(95, 158, 160, 0.05) 0px 25px;
   `;
 
   const FotoUsuario = styled.img`
@@ -52,6 +58,9 @@ export default function Posts() {
   const ContainerBotoes = styled.div`
     display: flex;
     align-items: center;
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
   `;
 
   const Texto = styled.p`
@@ -107,8 +116,10 @@ export default function Posts() {
         <ContainerBotoes>
           <BotaoRepostar>Repostar</BotaoRepostar>
           <BotaoResponder>Responder</BotaoResponder>
-          <Dislike src="src/img/dislike.png" />
-          <Like src="src/img/like.png" />
+          <div>
+            <Dislike src="src/img/dislike.png" />
+            <Like src="src/img/like.png" />
+          </div>
         </ContainerBotoes>
       </ContainerMensagem>
     </Container>
