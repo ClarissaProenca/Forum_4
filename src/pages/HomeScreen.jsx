@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer.jsx";
-import Posts from "../components/Posts.jsx";
+import Posts from "../components/PostCard.jsx";
 import MenuLateral from "../components/MenuLateral.jsx";
 import Header from "../components/Header.jsx";
 
