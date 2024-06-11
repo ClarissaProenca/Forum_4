@@ -1,60 +1,55 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const MenuContainer = styled.div`
+const HeaderContainer = styled.header`
+  background-color: #3f51b5;
+  padding: 20px;
+  color: white;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  position: fixed;
+  top: 0;
   width: 100%;
-  padding: 20px 0;
-  @media (max-width: 950px) {
-    justify-content: flex-end;
-  }
+  z-index: 1;
 `;
 
-const MenuLinks = styled.div`
+const Logo = styled.div`
+  font-size: 1.8rem;
+  font-weight: bold;
+`;
+
+const Nav = styled.nav`
   display: flex;
+  gap: 20px;
 `;
 
-const Link = styled.a`
-  color: black;
-  font-size: 0.8rem;
+const NavLink = styled(Link)`
+  color: white;
   text-decoration: none;
-  margin-left: 20px;
-  @media (max-width: 950px) {
-    display: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+    color: #ffeb3b;
   }
 `;
 
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SearchInput = styled.input`
-  padding: 5px 40px 5px 10px;
-  background-image: url("src/img/lupa.png") no-repeat;
-  background-position: right 10px center;
-  border-radius: 12px;
-  border: 3px solid #febe10;
-`;
-
-const SearchIcon = styled.img`
-  width: 30px;
-`;
-
-export default function Header() {
+const Header = () => {
   return (
-    <MenuContainer>
-      <SearchContainer>
-        <SearchInput type="text" placeholder="Pesquisar..." />
-        {/* <SearchIcon src="src/img/lupa.png" /> */}
-      </SearchContainer>
-      <MenuLinks>
-        <Link href="#">TOP TÓPICOS</Link>
-        <Link href="#">TOP POSTS</Link>
-        <Link href="#">PERFIL</Link>
-      </MenuLinks>
-    </MenuContainer>
+    <HeaderContainer>
+      <Logo>Meu Fórum</Logo>
+      <Nav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/posts">Posts</NavLink>
+        <NavLink to="/new-post">Novo Post</NavLink>
+        <NavLink to="/login">Login</NavLink>
+      </Nav>
+    </HeaderContainer>
   );
-}
+};
+
+export default Header;
