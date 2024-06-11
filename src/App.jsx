@@ -14,7 +14,7 @@ const Content = styled.div`
   padding: 20px;
   background-color: #e3f2fd;
   min-height: 100vh;
-  margin-top: 60px; /* Space for the fixed header */
+  margin-top: 60px;
 `;
 
 export default function App() {

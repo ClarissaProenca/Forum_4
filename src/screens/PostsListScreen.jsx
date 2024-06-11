@@ -30,7 +30,7 @@ const PostsListPage = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Carregando...</p>;
   }
 
   return (

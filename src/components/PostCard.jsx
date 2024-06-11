@@ -12,7 +12,7 @@ const Container = styled.div`
   width: 100%;
   background-color: #e8eaf6;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 `;
 
 const Title = styled.h2`
@@ -50,10 +50,14 @@ const PostCard = ({ post, onEdit, onDelete, onLike, onDislike }) => {
       <Title>{post.title}</Title>
       <Body>{post.body}</Body>
       <Actions>
-        <Button onClick={() => onEdit(post.id)}>Edit</Button>
-        <Button onClick={() => onDelete(post.id)}>Delete</Button>
-        <Button onClick={() => onLike(post.id)}>Like ({post.likes || 0})</Button>
-        <Button onClick={() => onDislike(post.id)}>Dislike ({post.dislikes || 0})</Button>
+        <Button onClick={() => onEdit(post.id)}>Editar</Button>
+        <Button onClick={() => onDelete(post.id)}>Deletar</Button>
+        <Button onClick={() => onLike(post.id)}>
+          Curtir ({post.likes || 0})
+        </Button>
+        <Button onClick={() => onDislike(post.id)}>
+          Descurtir ({post.dislikes || 0})
+        </Button>
       </Actions>
     </Container>
   );

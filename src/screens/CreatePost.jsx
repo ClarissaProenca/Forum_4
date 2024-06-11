@@ -11,7 +11,7 @@ const FormContainer = styled.div`
   border-radius: 10px;
   background-color: #f5f5f5;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 `;
 
 const FormTitle = styled.h2`
@@ -81,23 +81,23 @@ export default function CreatePost({ addPost }) {
         title,
         description,
         date: new Date().toISOString(),
-        author: "current_user", // Substitua pelo usuário atual
+        author: "current_user",
       };
       await addDoc(collection(db, "posts"), newPost);
       setTitle("");
       setDescription("");
-      alert("Post created successfully!");
+      alert("Post criado com sucesso!");
     } catch (error) {
-      alert("Error creating post: " + error.message);
+      alert("Error ao criar post: " + error.message);
     }
   };
 
   return (
     <FormContainer>
-      <FormTitle>Create a New Post</FormTitle>
+      <FormTitle>Criar novo post</FormTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label htmlFor="title">Title:</Label>
+          <Label htmlFor="title">Título:</Label>
           <Input
             id="title"
             type="text"
@@ -106,14 +106,14 @@ export default function CreatePost({ addPost }) {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="description">Description:</Label>
+          <Label htmlFor="description">Descrição:</Label>
           <Textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></Textarea>
         </FormGroup>
-        <Button type="submit">Create Post</Button>
+        <Button type="submit">Criar Post</Button>
       </Form>
     </FormContainer>
   );

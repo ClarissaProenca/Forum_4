@@ -36,11 +36,11 @@
       }, [id]);
 
       if (loading) {
-        return <p>Loading...</p>;
+        return <p>Carregando...</p>;
       }
 
       if (!post) {
-        return <p>Post not found</p>;
+        return <p>Post não encontrado</p>;
       }
 
       return (
