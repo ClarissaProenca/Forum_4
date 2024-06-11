@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
 import PostsListPage from "./screens/PostsListPage";
 import CreatePost from "./screens/CreatePost";
-import EditPost from "./screens/EditPost";  // Importando EditPost
+import EditPost from "./screens/EditPost";
 import PostDetailPage from "./screens/PostDetailPage";
 import Login from "./screens/Login";
 import Header from "./components/Header";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../firebase";
@@ -75,6 +75,7 @@ export default function EditPost() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -85,8 +86,10 @@ export default function EditPost() {
         const post = docSnap.data();
         setTitle(post.title);
         setDescription(post.description);
+        setLoading(false);
       } else {
         console.log("No such document!");
+        setLoading(false);
       }
     };
 
@@ -103,12 +106,16 @@ export default function EditPost() {
     navigate("/posts");
   };
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <FormContainer>
-      <FormTitle>Edit Post</FormTitle>
+      <FormTitle>Editar Post</FormTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label htmlFor="title">Title:</Label>
+          <Label htmlFor="title">Título:</Label>
           <Input
             id="title"
             type="text"
@@ -117,14 +124,14 @@ export default function EditPost() {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="description">Description:</Label>
+          <Label htmlFor="description">Descrição:</Label>
           <Textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></Textarea>
         </FormGroup>
-        <Button type="submit">Update Post</Button>
+        <Button type="submit">Atualizar Post</Button>
       </Form>
     </FormContainer>
   );
