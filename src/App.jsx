@@ -1,42 +1,27 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import styled from "styled-components";
-import "./App.css";
-import HomeScreen from "./screens/HomeScreen";
-import PostsListPage from "./screens/PostsListPage";
-import CreatePost from "./screens/CreatePost";
-import EditPost from "./screens/EditPost";
-import PostDetailPage from "./screens/PostDetailPage";
-import Login from "./screens/Login";
-import Header from "./components/Header";
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import PostsListPage from './screens/PostsListPage';
+import CreatePost from './screens/CreatePost';
+import EditPost from './screens/EditPost';
+import PostDetailPage from './screens/PostDetailPage';
+import Login from './screens/Login';
 
-const Content = styled.div`
-  padding: 20px;
-  background-color: #e3f2fd;
-  min-height: 100vh;
-  margin-top: 60px;
-`;
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [postagem, setPostagem] = useState([]);
-
-  function addPost(post) {
-    setPostagem([...postagem, post]);
-  }
-
   return (
-    <Router>
-      <Header />
-      <Content>
-        <Routes>
-          <Route path="/" element={<HomeScreen />} />
-          <Route path="/posts" element={<PostsListPage />} />
-          <Route path="/new-post" element={<CreatePost addPost={addPost} />} />
-          <Route path="/edit-post/:id" element={<EditPost />} />
-          <Route path="/post/:id" element={<PostDetailPage />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Content>
-    </Router>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Posts" component={PostsListPage} />
+        <Stack.Screen name="NewPost" component={CreatePost} />
+        <Stack.Screen name="EditPost" component={EditPost} />
+        <Stack.Screen name="PostDetail" component={PostDetailPage} />
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

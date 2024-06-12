@@ -1,35 +1,12 @@
-import React, { useState, useEffect } from "react";
-import {
-  collection,
-  getDocs,
-  doc,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
-import { db } from "../firebase";
-import { Link, useNavigate } from "react-router-dom";
-import PostCard from "../components/PostCard";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { db } from '../firebase';
+import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #e3f2fd;
-`;
-
-const PostLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  margin-bottom: 10px;
-`;
-
-const PostsListPage = () => {
+export default function PostsListPage() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Definindo useNavigate
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,66 +16,80 @@ const PostsListPage = () => {
         ...doc.data(),
       }));
       setPosts(postsData);
-      setLoading(false);
     };
 
     fetchPosts();
   }, []);
 
-  const handleEdit = (id) => {
-    navigate(`/edit-post/${id}`);
-  };
-
   const handleDelete = async (id) => {
     await deleteDoc(doc(db, "posts", id));
-    setPosts(posts.filter((post) => post.id !== id));
+    setPosts(posts.filter(post => post.id !== id));
   };
 
   const handleLike = async (id) => {
     const postRef = doc(db, "posts", id);
-    const post = posts.find((post) => post.id === id);
+    const post = posts.find(post => post.id === id);
     await updateDoc(postRef, {
-      likes: (post.likes || 0) + 1,
+      likes: (post.likes || 0) + 1
     });
-    setPosts(
-      posts.map((post) =>
-        post.id === id ? { ...post, likes: (post.likes || 0) + 1 } : post,
-      ),
-    );
+    setPosts(posts.map(post => post.id === id ? { ...post, likes: (post.likes || 0) + 1 } : post));
   };
 
   const handleDislike = async (id) => {
     const postRef = doc(db, "posts", id);
-    const post = posts.find((post) => post.id === id);
+    const post = posts.find(post => post.id === id);
     await updateDoc(postRef, {
-      dislikes: (post.dislikes || 0) + 1,
+      dislikes: (post.dislikes || 0) + 1
     });
-    setPosts(
-      posts.map((post) =>
-        post.id === id ? { ...post, dislikes: (post.dislikes || 0) + 1 } : post,
-      ),
-    );
+    setPosts(posts.map(post => post.id === id ? { ...post, dislikes: (post.dislikes || 0) + 1 } : post));
   };
 
-  if (loading) {
-    return <p>Carregando...</p>;
-  }
-
   return (
-    <Container>
-      {posts.map((post) => (
-        <PostLink key={post.id} to={`/post/${post.id}`}>
-          <PostCard
-            post={post}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onLike={handleLike}
-            onDislike={handleDislike}
-          />
-        </PostLink>
-      ))}
-    </Container>
+    <View style={styles.container}>
+      <FlatList
+        data={posts}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.post}>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text>{item.body}</Text>
+            <View style={styles.buttons}>
+              <Button title="Editar" onPress={() => navigation.navigate('EditPost', { id: item.id })} />
+              <Button title="Deletar" onPress={() => handleDelete(item.id)} />
+              <Button title={`Like (${item.likes || 0})`} onPress={() => handleLike(item.id)} />
+              <Button title={`Dislike (${item.dislikes || 0})`} onPress={() => handleDislike(item.id)} />
+            </View>
+          </View>
+        )}
+      />
+    </View>
   );
-};
+}
 
-export default PostsListPage;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#e3f2fd',
+  },
+  post: {
+    marginBottom: 20,
+    padding: 15,
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 0 },
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 10,
+  },
+});
