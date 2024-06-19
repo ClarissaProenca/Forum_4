@@ -11,7 +11,7 @@ const Card = styled.div`
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   font-family: 'Roboto', sans-serif;
   text-align: center;
 
@@ -32,6 +32,13 @@ const Title = styled.h2`
   @media (max-width: 768px) {
     font-size: 1.25rem;
   }
+`;
+
+const Category = styled.p`
+  margin: 5px 0;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #888;
 `;
 
 const Body = styled.p`
@@ -89,17 +96,11 @@ const EditButton = styled(Link)`
   color: white;
   text-align: center;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  margin: 5px 0;
+  width: 100%;
+  
   &:hover {
     background-color: #303f9f;
-  }
-
-  @media (max-width: 768px) {
-    width: 94,3%;
-    margin-bottom: 10px;
   }
 `;
 
@@ -107,6 +108,7 @@ const PostCard = ({ post, onDelete, onLike, onDislike }) => (
   <Card>
     {post.imageUri && <Image src={post.imageUri} alt="Post image" />}
     <Title style={{color: 'black'}}>{post.title}</Title>
+    <Category>{post.category}</Category>
     <Body style={{color: 'black'}}>{post.description}</Body>
     <ButtonGroup>
       <EditButton style={{color: 'white'}} to={`/edit-post/${post.id}`}>Editar</EditButton>

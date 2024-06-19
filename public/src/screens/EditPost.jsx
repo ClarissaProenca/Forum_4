@@ -3,23 +3,24 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../firebase";
-import Loading from '../components/Loading';
+import Loading from "../components/Loading";
+import ImagePickerComponent from "../components/ImagePicker";
 
 const FormContainer = styled.div`
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid #0c0b26;
+  border: 1px solid #3f51b5;
   border-radius: 10px;
   background-color: #f5f5f5;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: "Arial", sans-serif;
+  font-family: "Roboto", sans-serif;
 `;
 
 const FormTitle = styled.h2`
   margin-bottom: 20px;
   text-align: center;
-  color: #0c0b26;
+  color: #3f51b5;
 `;
 
 const Form = styled.form`
@@ -34,7 +35,7 @@ const FormGroup = styled.div`
 const Label = styled.label`
   margin-bottom: 5px;
   font-weight: bold;
-  color: #0c0b26;
+  color: #3f51b5;
 `;
 
 const Input = styled.input`
@@ -49,7 +50,7 @@ const Input = styled.input`
 
 const Textarea = styled.textarea`
   padding: 10px;
-  border: 1px solid #0c0b26;
+  border: 1px solid #3f51b5;
   border-radius: 5px;
   font-size: 1rem;
   width: 100%;
@@ -58,16 +59,26 @@ const Textarea = styled.textarea`
   background-color: #e8eaf6;
 `;
 
+const Select = styled.select`
+  padding: 10px;
+  border: 1px solid #3f51b5;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #e8eaf6;
+`;
+
 const Button = styled.button`
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
-  background-color: #0c0b26;
+  background-color: #3f51b5;
   color: white;
   font-size: 1rem;
   cursor: pointer;
   &:hover {
-    background-color: ##c92662;
+    background-color: #303f9f;
   }
 `;
 
@@ -76,6 +87,8 @@ export default function EditPost() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("tecnologia");
+  const [imageUri, setImageUri] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -87,6 +100,8 @@ export default function EditPost() {
         const post = docSnap.data();
         setTitle(post.title);
         setDescription(post.description);
+        setCategory(post.category);
+        setImageUri(post.imageUri);
         setLoading(false);
       } else {
         console.log("No such document!");
@@ -103,6 +118,8 @@ export default function EditPost() {
     await updateDoc(docRef, {
       title,
       description,
+      category,
+      imageUri,
     });
     navigate("/posts");
   };
@@ -132,7 +149,24 @@ export default function EditPost() {
             onChange={(e) => setDescription(e.target.value)}
           ></Textarea>
         </FormGroup>
-        <Button type="submit">Update Post</Button>
+        <FormGroup>
+          <Label htmlFor="category">Categoria:</Label>
+          <Select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="tecnologia">Tecnologia</option>
+            <option value="jardinagem">Jardinagem</option>
+            <option value="moda">Moda</option>
+            <option value="arte">Arte</option>
+          </Select>
+        </FormGroup>
+        <FormGroup>
+          <Label>Imagem:</Label>
+          <ImagePickerComponent onImageSelected={setImageUri} />
+        </FormGroup>
+        <Button type="submit">Atualizar Post</Button>
       </Form>
     </FormContainer>
   );
