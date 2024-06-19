@@ -97,7 +97,7 @@ const EditButton = styled(Link)`
   text-align: center;
   text-decoration: none;
   margin: 5px 0;
-  width: 100%;
+  width: 95%;
   
   &:hover {
     background-color: #303f9f;
