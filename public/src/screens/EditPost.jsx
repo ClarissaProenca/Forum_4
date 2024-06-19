@@ -3,12 +3,13 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../firebase";
+import Loading from '../components/Loading';
 
 const FormContainer = styled.div`
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid #3f51b5;
+  border: 1px solid #0c0b26;
   border-radius: 10px;
   background-color: #f5f5f5;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -18,7 +19,7 @@ const FormContainer = styled.div`
 const FormTitle = styled.h2`
   margin-bottom: 20px;
   text-align: center;
-  color: #3f51b5;
+  color: #0c0b26;
 `;
 
 const Form = styled.form`
@@ -33,7 +34,7 @@ const FormGroup = styled.div`
 const Label = styled.label`
   margin-bottom: 5px;
   font-weight: bold;
-  color: #3f51b5;
+  color: #0c0b26;
 `;
 
 const Input = styled.input`
@@ -48,7 +49,7 @@ const Input = styled.input`
 
 const Textarea = styled.textarea`
   padding: 10px;
-  border: 1px solid #3f51b5;
+  border: 1px solid #0c0b26;
   border-radius: 5px;
   font-size: 1rem;
   width: 100%;
@@ -61,12 +62,12 @@ const Button = styled.button`
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
-  background-color: #3f51b5;
+  background-color: #0c0b26;
   color: white;
   font-size: 1rem;
   cursor: pointer;
   &:hover {
-    background-color: #303f9f;
+    background-color: ##c92662;
   }
 `;
 
@@ -107,7 +108,7 @@ export default function EditPost() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (

@@ -4,12 +4,14 @@ import { db } from "../firebase";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import PostCard from "../components/PostCard";
 import { Link } from "react-router-dom";
+import Loading from '../components/Loading';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  margin: 0;
 
   @media (max-width: 768px) {
     padding: 10px;
@@ -26,7 +28,7 @@ const PostsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 800px; /* Define um tamanho máximo para centralizar */
+  max-width: 800px;
 `;
 
 const PostLink = styled(Link)`
@@ -57,12 +59,12 @@ const HomeScreen = () => {
   }, []);
 
   if (loading) {
-    return <p style={{ fontFamily: "sans-serif", fontSize: "42px" }}>Carregando...</p>;
+    return <Loading />;
   }
 
   return (
     <Container>
-      <Title>Top 5 Posts Mais Curtidos</Title>
+      <Title style={{color: 'white'}}>Top 5 Posts Mais Curtidos</Title>
       <PostsContainer>
         {posts.map((post) => (
           <PostLink key={post.id} to={`/post/${post.id}`}>

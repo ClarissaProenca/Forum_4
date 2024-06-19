@@ -11,10 +11,10 @@ import Register from "./screens/Register";
 import Header from "./components/Header";
 
 const Content = styled.div`
-  padding: 20px;
-  background-color: #e3f2fd;
+  padding: 80px 20px;
+  background-color: #212136;
+  margin: 0;
   min-height: 100vh;
-  margin-top: 80px;
 
   @media (max-width: 768px) {
     padding: 10px;

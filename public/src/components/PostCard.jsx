@@ -11,7 +11,7 @@ const Card = styled.div`
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px; /* Tamanho máximo para manter os cards consistentes */
+  max-width: 400px;
   font-family: 'Roboto', sans-serif;
   text-align: center;
 
@@ -20,8 +20,8 @@ const Card = styled.div`
   }
 
   a {
-    text-decoration: none; /* Remove sublinhado dos links */
-    color: inherit; /* Mantém a cor do texto */
+    text-decoration: none;
+    color: inherit;
   }
 `;
 
@@ -36,7 +36,7 @@ const Title = styled.h2`
 
 const Body = styled.p`
   margin: 10px 0;
-  word-wrap: break-word; /* Garante que o texto quebre corretamente */
+  word-wrap: break-word;
 
   @media (max-width: 768px) {
     font-size: 0.875rem;
@@ -53,7 +53,7 @@ const Image = styled.img`
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap; /* Permite que os botões quebrem linha em telas menores */
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     flex-direction: column;

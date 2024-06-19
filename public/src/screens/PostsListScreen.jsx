@@ -4,6 +4,7 @@ import { db } from "../firebase"; // Certifique-se de que este caminho está cor
 import { Link } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import styled from "styled-components";
+import Loading from '../components/Loading';
 
 const Container = styled.div`
   display: flex;
@@ -42,7 +43,7 @@ const PostsListScreen = () => {
   }, []);
 
   if (loading) {
-    return <p style={{ fontFamily: "sans-serif", fontSize: "42px" }}>Carregando...</p>;
+    return <Loading />;
   }
 
   return (

@@ -5,14 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import styled from "styled-components";
 import { useSwipeable } from "react-swipeable";
+import Loading from "../components/Loading";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #e3f2fd;
-  width: 60%
 
   @media (max-width: 768px) {
     padding: 10px;
@@ -107,13 +106,13 @@ const PostsListPage = () => {
   });
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (
     <Container {...handlers}>
       {posts.length === 0 ? (
-        <p>Não há posts em nosso site atualmente</p>
+        <p style={{color: 'white'}}>Não há posts em nosso site atualmente</p>
       ) : (
         posts.map((post) => (
           <CenteredLink key={post.id} to={`/post/${post.id}`}>
