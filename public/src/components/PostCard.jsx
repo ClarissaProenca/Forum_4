@@ -98,7 +98,7 @@ const EditButton = styled(Link)`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 94,3%;
     margin-bottom: 10px;
   }
 `;
